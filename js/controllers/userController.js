@@ -1,17 +1,24 @@
-const user = JSON.parse(localStorage.getItem("user"));
+document.addEventListener("DOMContentLoaded", () => {
 
-document.getElementById("welcome").innerText = "Olá " + user.name;
+  const user = JSON.parse(localStorage.getItem("user"));
 
-document.getElementById("progressBar").style.width = user.progress + "%";
+  // 🔒 proteção
+  if (!user) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  // 👋 info do user
+  document.getElementById("welcome").innerText = "Olá " + user.name;
+  document.getElementById("progressBar").style.width = user.progress + "%";
+
+});
 
 function goExercise(type) {
   window.location.href = `exercise.html?type=${type}`;
 }
 
 function logout() {
-  // limpar tudo
   localStorage.clear();
-
-  // redirecionar
   window.location.href = "index.html";
 }
